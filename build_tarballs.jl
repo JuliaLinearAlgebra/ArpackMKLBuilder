@@ -52,12 +52,12 @@ platforms = [
     Linux(:x86_64, libc=:glibc),
     Linux(:i686, libc=:glibc)
 ]
+platforms = expand_gcc_versions(platforms)
 
 # The products that we will ensure are always built
 products(prefix) = [
     LibraryProduct(prefix, "libarpack", Symbol("\x0e"))
 ]
-products = expand_gcc_versions(products)
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
