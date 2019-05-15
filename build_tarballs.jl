@@ -3,7 +3,7 @@
 using BinaryBuilder
 
 name = "Arpack"
-version = v"0.1.0"
+version = v"3.5.0-3"
 
 # Collection of sources required to build ArpackMKLBuilder
 sources = [
