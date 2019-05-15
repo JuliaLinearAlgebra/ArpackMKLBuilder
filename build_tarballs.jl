@@ -57,6 +57,7 @@ platforms = [
 products(prefix) = [
     LibraryProduct(prefix, "libarpack", Symbol("\x0e"))
 ]
+products = expand_gcc_versions(products)
 
 # Dependencies that must be installed before this package can be built
 dependencies = [
