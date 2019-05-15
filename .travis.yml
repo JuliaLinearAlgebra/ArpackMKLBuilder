@@ -1,0 +1,39 @@
+language: julia
+os:
+  - linux
+julia:
+  - 1.0
+notifications:
+  email: false
+git:
+  depth: 99999999
+cache:
+  timeout: 1000
+  directories:
+    - downloads
+env:
+  global:
+    - BINARYBUILDER_DOWNLOADS_CACHE=downloads
+    - BINARYBUILDER_AUTOMATIC_APPLE=false
+sudo: required
+
+# Before anything else, get the latest versions of things
+before_script:
+  - julia -e 'using Pkg; pkg"add BinaryProvider"; pkg"add BinaryBuilder#master"; Pkg.build()'
+
+script:
+  - julia build_tarballs.jl
+
+
+deploy:
+    provider: releases
+    api_key:
+        # Note; this api_key is only valid for arnavs/ArpackMKLBuilder; you need
+        # to make your own: https://docs.travis-ci.com/user/deployment/releases/
+        secure: yabInrGuBg6YOIw58XIVKuWMWSwZ3aZM6B83ORqkG9vfrs/6bOuEECKdNQifRHIT/TBgPWruU/wTtX/zXO9kBi3ctR5t0r7wsBY5NIszXQdgsUmFu4lsvwVi2p0c6z0bTWpD4ZY9Aj6xzgFRmhgbIbkNlhO95upUUrr/0gxTplk/JBuEMUFsOWPnmaYKhnLi+ERsnLWIcHR5xv5ttypmbZqAa3p8aKFKAFvBwY4vGCzIWkkCm6tTVo8tUX7gLjH6vpgb8QtlR6usS/61y0xSbvvgVBSA4CHhvw3L1tkWNs1C2L4M1Zx6Ge4pqV5a8jowy9NB13nJY1N/IpmO+pou7gomLms7oGIhNaglPNBBMfr8NX+4uWijoYLBJPEigzLYwCBdmYyqEhlMIIsvRS9AqnfJqQg1zaaHMcaGbTFJrb1NypJSEw70bnwvX8b1oMUxer6w/eEwLklJMFXsnQjO6jbD8QMBYlDtgTQuKUDD6/Th+1WxBB+sn+9os3mq8JKnElVUNHeJqrlZ4y02AVm3uAghjA416l7Hc4dzJ1O1pQN19P1ejR7k2jQXPYafmDDiIRrKor+6kIXUYzw7Fk2SaMX8gTTc5F4G7wBt39IDibe7Iu4EvTAn38zNxXQPaIGD7FfwkmVMfV6a3+p7A1p9MyVwH1Sgc8lVNXiLmJjP0mo=
+    file_glob: true
+    file: products/*
+    skip_cleanup: true
+    on:
+        repo: arnavs/ArpackMKLBuilder
+        tags: true
