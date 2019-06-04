@@ -43,7 +43,7 @@ make clean all
 make install
 
 # Install into ${prefix}/lib
-mkdir ${prefix}/lib
+mkdir -p ${prefix}/lib
 cp lib/libarpack.so.2.0.0 ${prefix}/lib
 """
 
