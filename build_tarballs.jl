@@ -41,9 +41,10 @@ FFLAGS="${FFLAGS} -fdefault-integer-8 ${SYMBOL_DEFS} -ff2c"
 cmake ..  -DINTERFACE64=1 -DBUILD_SHARED_LIBS=ON -DBLAS_LIBRARIES="-L$MKLROOT/lib -lmkl_rt" -DLAPACK_LIBRARIES="-L$MKLROOT/lib -lmkl_rt" -DCMAKE_EXE_LINKER_FLAGS="${CMAKE_EXE_LINKER_FLAGS}" -DCMAKE_Fortran_FLAGS="${FFLAGS}"
 make clean all
 make install
-cp lib/libarpack.so.2.0.0 $prefix
-exit
 
+# Install into ${prefix}/lib
+mkdir ${prefix}/lib
+cp lib/libarpack.so.2.0.0 ${prefix}/lib
 """
 
 # These are the platforms we will build for by default, unless further
