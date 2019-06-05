@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/arnavs/ArpackMKLBuilder.svg?branch=master)](https://travis-ci.org/arnavs/ArpackMKLBuilder)
 
-This repository builds binary artifacts for the ArpackMKLBuilder project. Binary artifacts are automatically uploaded to
+This repository builds binary artifacts for https://github.com/arnavs/ArpackMKL.jl. Binary artifacts are automatically uploaded to
 [this repository's GitHub releases page](https://github.com/arnavs/ArpackMKLBuilder/releases) whenever a tag is created
 on this repository.
 
