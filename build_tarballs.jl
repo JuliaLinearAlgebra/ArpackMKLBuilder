@@ -38,6 +38,9 @@ for sym in scnrm2 dznrm2 csscal zdscal dgetrf dgetrs; do     SYMBOL_DEFS="${SYMB
 # Set up not only lowercase symbol remappings, but uppercase as well:
 SYMBOL_DEFS="${SYMBOL_DEFS} ${SYMBOL_DEFS^^}"
 FFLAGS="${FFLAGS} -fdefault-integer-8 ${SYMBOL_DEFS} -ff2c"
+if [[ "${target}" == *mingw* ]]; then
+    FFLAGS="${FFLAGS} -L${prefix}/bin"
+fi
 cmake .. \
     -DCMAKE_INSTALL_PREFIX=$prefix \
     -DCMAKE_TOOLCHAIN_FILE=/opt/$target/$target.toolchain \
@@ -57,6 +60,8 @@ platforms = [
     Linux(:x86_64, libc=:glibc),
     Linux(:i686, libc=:glibc),
     MacOS(:x86_64),
+    Windows(:i686),
+    Windows(:x86_64),
 ]
 platforms = expand_gcc_versions(platforms)
 
